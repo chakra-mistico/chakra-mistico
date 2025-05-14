@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Chakra Místico - Bijuteria Artesanal</title>
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    /* Reset básico */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: #FFFFFF;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d4c9ff'/%3E%3Cstop offset='1' stop-color='%23d4c9ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d4c9ff'/%3E%3Cstop offset='1' stop-color='%23d4c9ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23a296ff'/%3E%3Cstop offset='1' stop-color='%23a296ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FFFFFF'/%3E%3Cstop offset='1' stop-color='%23FFFFFF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23A296FF'/%3E%3Cstop offset='1' stop-color='%23A296FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23A296FF'/%3E%3Cstop offset='1' stop-color='%23A296FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        max-width: 100vw;
+        overscroll-behavior-y: contain;
+    }
+    header nav a {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    a:hover, a:focus {
+        color: #0a0038; /* Azul escuro para hover */
+        outline: none;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #0E004F;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        z-index: 1000;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 8px rgb(14 0 79 / 0.6);
+    }
+    header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        user-select: none;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(1px,1px,1px,1px);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+        padding: 0;
+        margin: -1px;
+    }
+    header img.logo {
+        max-height: 44px;
+        width: auto;
+        user-select: none;
+    }
+    nav {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        user-select: none;
+    }
+    nav a:hover, nav a:focus {
+        background-color: #0a0038;
+        color: white;
+        outline-offset: 2px;
+    }
+    main {
+        margin-top: 72px; /* espaço para o header fixo */
+        padding: 1rem 1.5rem 3rem 1.5rem;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    section {
+        margin-bottom: 3rem;
+    }
+    #sobre {
+        scroll-margin-top: 72px;
+    }
+
+    /* Destaque agora com display flex */
+    .destaque {
+        background: linear-gradient(135deg, #0E004F 0%, #342b78 100%);
+        color: white;
+        border-radius: 12px;
+        padding: 2rem 3rem;
+        box-shadow: 0 8px 20px rgb(14 0 79 / 0.8);
+        user-select: none;
+        position: relative;
+        border: 3px solid #4b26a0;
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: nowrap;
+    }
+    /* Container para o texto interno */
+    .destaque-text {
+    max-width: 560px;
+    text-align: center;
+    }
+    .destaque h2 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.85);
+        font-weight: 700;
+    }
+    .destaque p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-shadow: 1px 1px 6px rgba(0,0,0,0.75);
+        margin: 0;
+    }
+    /* Imagens quadradas dentro do destaque */
+    .destaque-image {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        user-select: none;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .linha-roxa {
+        width: 120px;
+        height: 5px;
+        background: #0E004F;
+        margin: 2rem auto 0 auto;
+        border-radius: 3px;
+        box-shadow: 0 0 15px #0E004Fbb;
+    }
+
+    /* Responsividade mobile */
+    @media (max-width: 600px) {
+        header {
+            padding: 0.8rem 1rem;
+        }
+        nav {
+            gap: 0.75rem;
+        }
+        nav a {
+            font-size: 0.95rem;
+        }
+
+        .destaque {
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            gap: 1rem;
+        }
+        .destaque-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+        }
+        .destaque-text {
+            max-width: none;
+        }
+        .destaque h2 {
+            font-size: 1.6rem;
+        }
+        .destaque p {
+            font-size: 1rem;
+        }
+    }
+
+    /* Outras seções mantidas conforme original (sobre, produtos, avaliações, contato, footer) */
+    /* Seção Sobre */
+    #sobre h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #0E004F;
+        text-align: center;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    #sobre p {
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1rem;
+        color: #444;
+        text-align: center;
+        line-height: 1.5;
+    }
+    #sobre .blocos-mvv {
+        display: flex;
+        gap: 1.3rem;
+        max-width: 900px;
+        margin: 2rem auto 0 auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #sobre .bloco {
+        background: #e6e9f4;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgb(14 0 79 / 0.15);
+        padding: 1.25rem 1rem 1.75rem 1rem;
+        flex: 1 1 250px;
+        min-width: 250px;
+        color: #0E004F;
+        user-select: text;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.3s ease;
+    }
+    #sobre .bloco:hover,
+    #sobre .bloco:focus-within {
+        box-shadow: 0 9px 20px rgb(14 0 79 / 0.3);
+        outline: none;
+    }
+    #sobre .bloco h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        text-align: center;
+    }
+    #sobre .bloco p, #sobre .bloco ul {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #202040;
+        flex-grow: 1;
+    }
+    #sobre .bloco ul {
+        padding-left: 1.2rem;
+        margin: 0;
+    }
+    #sobre .bloco ul li {
+        margin-bottom: 0.4rem;
+    }
+
+    /* Produtos */
+    #produtos h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #0E004F;
+        text-align: center;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .produtos {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+    .produto {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        width: 280px;
+        padding: 1rem 1rem 2rem 1rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .produto:hover,
+    .produto:focus-within {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(14,0,79,0.35);
+        outline: none;
+        z-index: 2;
+    }
+    .produto img {
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+    .produto h3 {
+        font-size: 1.4rem;
+        color: #0E004F;
+        margin-bottom: 0.4rem;
+        font-weight: 700;
+    }
+    .produto p {
+        flex-grow: 1;
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    .produto strong {
+        color: #0E004F;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: block;
+        font-size: 1.1rem;
+    }
+    .produto button {
+        background-color: #0E004F;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        user-select: none;
+    }
+    .produto button:hover,
+    .produto button:focus {
+        background-color: #0a0038;
+        outline: none;
+    }
+    .mais-produtos {
+        background: #f0e9ff;
+        border: 2px dashed #6a52f7;
+        border-radius: 12px;
+        width: 280px;
+        padding: 1.5rem 1rem 2rem 1rem;
+        text-align: center;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 0 12px #6a52f7aa;
+        transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        color: #6a52f7;
+        font-weight: 700;
+        font-size: 1.2rem;
+        gap: 1.2rem;
+    }
+    .mais-produtos:hover,
+    .mais-produtos:focus {
+        box-shadow: 0 0 25px #6a52f7ee;
+        background-color: #e4dbff;
+        outline: none;
+    }
+    .mais-produtos svg {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto;
+        fill: #6a52f7;
+    }
+    /* Espaçamento entre os botões "mais-produtos" quando houver mais de um lado a lado */
+    .mais-produtos + .mais-produtos {
+        margin-left: 1rem;
+    }
+
+    /* Avaliações */
+    #avaliacoes h2 {
+        font-size: 2rem;
+        color: #0E004F;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    #avaliacoes ul {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgb(14 0 79 / 0.2);
+        list-style-type: none;
+    }
+    #avaliacoes ul li {
+        margin-bottom: 1rem;
+        font-style: normal;
+        font-size: 1.1rem;
+        color: #202040;
+        user-select: text;
+    }
+    #avaliacoes ul b {
+        font-size: 1.3rem;
+    }
+    #avaliacoes ul li:last-child {
+        margin-bottom: 0;
+    }
+    /* Contato */
+    #contato {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    #contato h2 {
+        font-size: 2rem;
+        color: #0E004F;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    #contato p, #contato a, #contato li {
+        font-size: 1rem;
+        color: #444;
+        line-height: 1.4;
+        text-align: center;
+        user-select: text;
+    }
+    #contato a {
+        font-weight: 600;
+        color: #0E004F;
+        transition: color 0.3s ease;
+    }
+    #contato a:hover,
+    #contato a:focus {
+        color: #0a0038;
+        outline: none;
+    }
+    .contato-form {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(14, 0, 79, 0.4);
+        padding: 2rem 1.5rem 2.5rem 1.5rem;
+        margin-top: 1.5rem;
+        user-select: none;
+    }
+    .campo {
+        margin-bottom: 1.2rem;
+        display: flex;
+        flex-direction: column;
+    }
+    label {
+        margin-bottom: 0.35rem;
+        font-weight: 600;
+        color: #0E004F;
+        font-size: 1rem;
+        user-select: text;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        padding: 0.65rem 0.85rem;
+        border-radius: 6px;
+        border: 1.5px solid #ddd;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+        outline-offset: 3px;
+        transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+        border-color: #0a0038;
+        outline: none;
+    }
+    textarea {
+        min-height: 110px;
+    }
+    button.submit-btn {
+        width: 100%;
+        background-color: #0E004F;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.95rem 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover,
+    button.submit-btn:focus {
+        background-color: #0a0038;
+        outline: none;
+    }
+    .contato-info {
+        font-size: 1rem;
+        color: #444;
+        line-height: 1.4;
+        text-align: center;
+        user-select: text;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .contato-info a {
+        color: #0E004F;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    .contato-info a:hover,
+    .contato-info a:focus {
+        color: #0a0038;
+        outline: none;
+    }
+    footer {
+        background: #0E004F;
+        color: white;
+        text-align: center;
+        padding: 1rem 1rem;
+        user-select: none;
+        font-size: 0.9rem;
+        position: relative;
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #0a0038aa;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+<header>
+<h1>Chakra Místico</h1>
+<img src="imagens/chakv2.jpg" alt="Logo Chakra Místico" class="logo" />
+<nav role="navigation" aria-label="Menu principal">
+    <a href="#destaque" tabindex="0"><i class="fas fa-home" aria-hidden="true"></i> Início</a>
+    <a href="#sobre" tabindex="0"><i class="fas fa-info-circle" aria-hidden="true"></i> Sobre</a>
+    <a href="#produtos" tabindex="0"><i class="fas fa-shopping-bag"></i> Produtos</a>
+    <a href="#avaliacoes" tabindex="0"><i class="fas fa-star" aria-hidden="true"></i> Avaliações</a>
+    <a href="#contato" tabindex="0"><i class="fas fa-envelope" aria-hidden="true"></i> Contato</a>
+</nav>
+</header>
+
+<main>
+<section class="destaque" aria-label="Destaque principal" tabindex="-1">
+    <img src="imagens/bolinhas.png" alt="Imagem decorativa esquerda" class="destaque-image" tabindex="0" />
+    <div class="destaque-text">
+    <h2>Miçangas Chakra Místico</h2>
+    <p>Miçangas pensadas para despertar sua energia e harmonia interior. Feitas com materiais naturais, são ideais para criar peças únicas que ajudam no alinhamento dos chakras e trazem equilíbrio ao seu dia a dia.</p>
+    <div class="linha-roxa" aria-hidden="true"></div>
+    </div>
+    <img src="imagens/bolinhas (1).png" alt="Imagem decorativa direita" class="destaque-image" tabindex="0" />
+</section>
+
+<section id="sobre" tabindex="-1">
+    <h2>Sobre a Chakra Místico</h2>
+    <p>A <strong>Chakra Místico</strong> é uma linha de miçangas artesanais, desenvolvida para promover o equilíbrio energético e bem-estar. Cada peça é elaborada com pedras naturais e materiais de alta qualidade, oferecendo um toque especial para quem busca estilo e harmonia. Ideal para todos que desejam incorporar a energia dos chakras no cotidiano.</p>
+    <p>A Chakra Místico é mais do que uma marca de miçangas, é uma filosofia de vida. Criamos peças artesanais feitas com pedras naturais, que visam o equilíbrio energético de quem as usa. Cada peça é pensada para conectar a energia do corpo, mente e espírito, proporcionando bem-estar, paz interior e harmonia.</p>
+    <p>Nosso objetivo é trazer uma experiência única para nossos clientes, oferecendo não apenas miçangas, mas ferramentas para um estilo de vida mais equilibrado e harmonioso. A Chakra Místico acredita que todos podem viver em sintonia com sua verdadeira essência.</p>
+    <div class="blocos-mvv" role="list">
+    <article class="bloco" role="listitem" tabindex="0">
+        <h3><i class="fas fa-bullseye"></i> Missão</h3>
+        <p>Oferecer miçangas que conectam as pessoas com sua essência energética, criando peças únicas e de qualidade, com o propósito de promover o equilíbrio dos chakras e a harmonização de mente e corpo.</p>
+    </article>
+    <article class="bloco" role="listitem" tabindex="0">
+        <h3><i class="fas fa-eye"></i> Visão</h3>
+        <p>Ser referência no mercado de miçangas artesanais energéticas, proporcionando aos nossos clientes não só produtos de alta qualidade, mas também uma experiência de autoconhecimento e bem-estar. Queremos ser a marca escolhida por quem busca mais do que acessórios: buscamos transformar vidas.</p>
+    </article>
+    <article class="bloco" role="listitem" tabindex="0">
+        <h3><i class="fas fa-balance-scale"></i> Valores</h3>
+        <ul>
+        <li><strong>Autenticidade:</strong> Cada peça é única, feita com miçangas de pedras naturais e materiais de qualidade.</li>
+        <li><strong>Equilíbrio:</strong> Nossas miçangas são feitas para trazer equilíbrio à vida de nossos clientes.</li>
+        <li><strong>Sustentabilidade:</strong> Prezamos por processos de produção éticos e responsáveis com o meio ambiente.</li>
+        <li><strong>Bem-estar:</strong> Acreditamos que a harmonia entre corpo e mente é fundamental para uma vida plena.</li>
+        </ul>
+    </article>
+    </div>
+</section>
+
+<section id="produtos" tabindex="-1">
+    <h2><i class="fas fa-shopping-bag"></i> Nossos Produtos</h2>
+    <div class="produtos" role="list">
+        <article class="produto" role="listitem" tabindex="0">
+            <img src="imagens/ametista.jpg" alt="Kit Ametista 6mm (kit Contém 2 Fios)" loading="lazy" />
+            <h3>Kit Ametista 6mm (kit Contém 2 Fios)</h3>
+            <p>A Ametista é uma pedra de proteção e purificação, que transforma energias negativas em positivas. Fortalece a intuição, ajuda na meditação e estimula o metabolismo, auxiliando na desintoxicação do corpo.</p>
+            <strong>Preço: R$ 113,71</strong>
+            <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-1609347091-kit-ametista-6mm-kit-contem-2-fios-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+        </article>
+        <article class="produto" role="listitem" tabindex="0">
+            <img src="imagens/shambala 7 chakras.jpg" alt="Pulseira Shambala 7 Chakras" loading="lazy" />
+            <h3>Pulseira Shambala 7 Chakras</h3>
+            <p>A Pulseira Shambala 7 Chakras é um acessório espiritual que simboliza equilíbrio e harmonia. Cada pedra representa um dos sete chakras, ajudando a alinhar as energias do corpo, promovendo bem-estar físico, mental e emocional. Ideal para meditação, proteção e fortalecimento interior.</p>
+            <strong>Preço: R$ 39,00</strong>
+            <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-713965638-pulseira-shambala-7-chakras-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+        </article>
+        <article class="produto" role="listitem" tabindex="0">
+            <img src="imagens/quartzo rosa.jpg" alt="Kit Quartzo Rosa 8mm (kit 2 Fios)" loading="lazy" />
+            <h3>Kit Quartzo Rosa 8mm (kit 2 Fios)</h3>
+            <p>Conjunto com duas tiras de contas de Quartzo Rosa natural, com esferas de 8mm. Conhecida como a pedra do amor, promove a harmonia nos relacionamentos, acalma emoções e fortalece o amor-próprio. Ideal para bijuterias com significado emocional e energético.</p>
+            <strong>Preço: R$ 88,56</strong>
+            <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-1063852397-kit-quartzo-rosa-8mm-kit-2-fios-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+        </article>
+            <!-- Produtos adicionais -->
+            <article class="produto" role="listitem" tabindex="0">
+                <img src="imagens/lapis lazuli.jpg" alt="Produto 4" loading="lazy" />
+                <h3>Lápis Lazuli 6mm (kit 2 Fios)</h3>
+                <p>Duas tiras de contas de Lápis Lazuli natural, com esferas de 6mm. Pedra da sabedoria e da verdade, estimula a mente, fortalece a intuição e favorece a comunicação. Ideal para peças que unem beleza e espiritualidade.</p>
+                <strong>Preço: R$ 104,01</strong>
+                <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-1610481125-lapis-lazuli-6mm-kit-2-fios-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+            </article>
+            <article class="produto" role="listitem" tabindex="0">
+                <img src="imagens/pedra vulcanica.jpg" alt="Produto 5" loading="lazy" />
+                <h3>Kit Pedra Vulcânica 10mm (kit Contém 2 Fios)</h3>
+                <p>Conjunto com duas tiras de contas de Pedra Vulcânica natural, esferas de 10mm. Conhecida por sua energia de força e renovação, ajuda na superação de desafios, proteção energética e equilíbrio emocional. Ideal para peças com estilo rústico e significado espiritual.</p>
+                <strong>Preço: R$ 104,01</strong>
+                <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-713965640-kit-pedra-vulcnica-10mm-kit-contem-2-fios-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+            </article>
+            <article class="produto" role="listitem" tabindex="0">
+                <img src="imagens/obsidiana.jpg" alt="Produto 6" loading="lazy" />
+                <h3>Kit Obsidiana 8mm (kit 2 Fios)</h3>
+                <p>Duas tiras de contas de Obsidiana natural, com esferas de 8mm. Pedra de proteção intensa, afasta energias negativas, promove clareza mental e auxilia no autoconhecimento. Perfeita para bijuterias com propósito espiritual e energético.</p>
+                <strong>Preço: R$ 103,01</strong>
+                <button onclick="window.open('https://produto.mercadolivre.com.br/MLB-841044075-kit-obsidiana-8mm-kit-2-fios-_JM', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+            </article>
+
+            <article class="mais-produtos" role="listitem" tabindex="0" aria-label="Mais produtos no Instagram" onclick="window.open('https://www.instagram.com/chakra_mistico', '_blank', 'noopener,noreferrer')" onkeypress="if(event.key==='Enter' || event.key===' ') {window.open('https://www.instagram.com/chakra_mistico', '_blank', 'noopener,noreferrer');}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 12l-4-4v3H3v2h6v3l4-4zm7 2h-2v4H6v-4H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"/></svg>
+                <span>Mais Produtos<br />no Instagram</span>
+            </article>
+
+            <article class="mais-produtos" role="listitem" tabindex="0" aria-label="Mais produtos no site" onclick="window.location.href='produtos.html';" onkeypress="if(event.key==='Enter' || event.key===' ') {window.location.href='produtos.html';}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 12l-4-4v3H3v2h6v3l4-4zm7 2h-2v4H6v-4H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"/></svg>
+                <span>Mais Produtos<br />no Site</span>
+            </article>
+        </div>
+    </section>
+
+<section id="avaliacoes" tabindex="-1">
+    <h2><i class="fas fa-star"></i> Avaliações</h2>
+    <ul>
+    <b>Júlia Azevedo - ⭐️⭐️⭐️⭐️⭐️ </b><li>Simplesmente incrível! Me sinto mais equilibrada. </li>
+    <b>Carla Andrade -  ⭐️⭐️⭐️⭐️ </b><li>Produto lindo e de excelente qualidade. Super recomendo!</li>
+    <b>Leonardo de Souza - ⭐️⭐️⭐️⭐️⭐️ </b><li>Amei minha compra! Vou comprar mais!</li>
+    </ul> 
+</section>
+
+<section id="contato" tabindex="-1">
+    <h2><i class="fas fa-envelope"></i> Entre em Contato</h2>
+    <p class="contato-info"><i class="fab fa-instagram"></i> Instagram: <a href="https://www.instagram.com/chakra_mistico" target="_blank" rel="noopener noreferrer">@chakra_mistico</a></p>
+    <p class="contato-info"><i class="fas fa-phone"></i> Telefone: <a href="tel:+5511987654321">+55 11 98765-4321</a></p>
+    <p class="contato-info"><i class="fas fa-envelope"></i> E-mail: <a href="mailto:contato@chakramistico.com">chakramistico@gmail.com</a></p>
+
+    <form class="contato-form" action="#" method="POST" onsubmit="return submitForm(event)">
+    <div class="campo">
+        <label for="nome"><i class="fas fa-user"></i> Nome:</label>
+        <input type="text" id="nome" name="nome" required autocomplete="name" />
+    </div>
+    <div class="campo">
+        <label for="email"><i class="fas fa-envelope"></i> E-mail:</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+    </div>
+    <div class="campo">
+        <label for="mensagem"><i class="fas fa-comment"></i> Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+    </div>
+    <button class="submit-btn" type="submit">Enviar</button>
+    </form>
+    <div id="form-status" role="alert" aria-live="polite" style="margin-top:1rem;text-align:center;color:#0E004F;font-weight:700;display:none;"></div>
+</section>
+</main>
+
+<footer>
+<p>&copy; 2025 Chakra Místico. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+// Suaviza a rolagem para os links do menu, previne comportamento padrão e usa scrollIntoView com smooth e offset
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').substring(1);
+        const target = document.getElementById(id);
+        if(target) {
+            const headerOffset = 72;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    });
+});
+
+// Simulação simples de envio do formulário com feedback para o usuário
+function submitForm(event) {
+    event.preventDefault();
+    const status = document.getElementById('form-status');
+    status.style.display = 'block';
+    status.textContent = 'Enviando mensagem...';
+
+    setTimeout(() => {
+        status.textContent = 'Mensagem enviada com sucesso! Obrigado por entrar em contato.';
+        document.querySelector('.contato-form').reset();
+    }, 1500);
+
+    return false;
+}
+</script>
+</body>
+</html>
+

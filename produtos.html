@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Produtos - Chakra Místico</title>
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    /* Reset básico */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: #FFFFFF;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d4c9ff'/%3E%3Cstop offset='1' stop-color='%23d4c9ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d4c9ff'/%3E%3Cstop offset='1' stop-color='%23d4c9ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23a296ff'/%3E%3Cstop offset='1' stop-color='%23a296ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FFFFFF'/%3E%3Cstop offset='1' stop-color='%23FFFFFF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23A296FF'/%3E%3Cstop offset='1' stop-color='%23A296FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23A296FF'/%3E%3Cstop offset='1' stop-color='%23A296FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        max-width: 100vw;
+        overscroll-behavior-y: contain;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #0E004F;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+        padding: 0 1.5rem;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgb(14 0 79 / 0.6);
+        flex-wrap: nowrap;
+    }
+    header img.logo {
+        max-height: 44px;
+        width: auto;
+        user-select: none;
+        cursor: pointer;
+    }
+    nav {
+        display: flex;
+        justify-content: flex-end;
+        width: auto;
+    }
+    nav a.voltar-link {
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 0.3rem 0;
+        user-select: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        transition: color 0.3s ease;
+        border-radius: 0;
+        outline: none;
+    }
+    nav a.voltar-link:hover,
+    nav a.voltar-link:focus {
+        color: #6a52f7;
+    }
+    main {
+        margin-top: 72px;
+        max-width: 1100px;
+        padding: 1rem 1.5rem 3rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .voltar-fora {
+        display: none; 
+    }
+    #produtos h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #0E004F;
+        text-align: center;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    /* Contêiner da linha de produtos */
+    .linha-produtos-container {
+        margin-bottom: 2rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    /* Botões setas sem circulo, transparentes, só ícone */
+    .scroll-button {
+        background: transparent;
+        border: none;
+        color: #0E004F;
+        font-size: 2.2rem;
+        cursor: pointer;
+        user-select: none;
+        padding: 0;
+        margin: 0 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+        flex-shrink: 0;
+    }
+    .scroll-button:disabled {
+        color: #aaa;
+        cursor: default;
+    }
+    .scroll-button:hover:not(:disabled),
+    .scroll-button:focus:not(:disabled) {
+        color: #6a52f7;
+        outline: none;
+    }
+    /* Remove contorno azul padrão */
+    .scroll-button:focus {
+        outline: none;
+        box-shadow: 0 0 8px #6a52f7;
+        border-radius: 4px;
+    }
+    /* Container scroll horizontal linha */
+    .produtos-scroll-linha {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+        scroll-behavior: smooth;
+        user-select: none;
+        width: 100%;
+        padding-bottom: 4px;
+        scroll-snap-type: x mandatory;
+    }
+    .produtos-scroll-linha::-webkit-scrollbar {
+        display: none;
+    }
+    .produto {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        width: 280px; /* Aumentado para mais largura */
+        padding: 1rem 1rem 1.75rem 1rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        user-select: none;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+    .produto:hover,
+    .produto:focus-within {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(14,0,79,0.35);
+        outline: none;
+        z-index: 2;
+    }
+    .produto img {
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+    .produto h3 {
+        font-size: 1.1rem;
+        color: #0E004F;
+        margin-bottom: 0.3rem;
+        font-weight: 700;
+    }
+    .produto p {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 0.8rem;
+        line-height: 1.3;
+        flex-grow: 1;
+    }
+    .produto strong {
+        color: #0E004F;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: block;
+        font-size: 1rem;
+    }
+    .produto button {
+        background-color: #0E004F;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.95rem;
+        transition: background-color 0.3s ease;
+        user-select: none;
+    }
+    .produto button:hover,
+    .produto button:focus {
+        background-color: #0a0038;
+        outline: none;
+    }
+    /* Responsividade */
+    @media (max-width: 900px) {
+        .produto {
+            width: 220px;
+        }
+    }
+    @media (max-width: 600px) {
+        main {
+            padding: 1rem 1rem 3rem;
+        }
+    }
+    footer {
+        background: #0E004F;
+        color: white;
+        text-align: center;
+        padding: 1rem 1rem;
+        user-select: none;
+        font-size: 0.9rem;
+        position: relative;
+        border-top: none;
+    }
+</style>
+</head>
+<body>
+<header>
+    <img src="imagens/chakv2.jpg" alt="Logo Chakra Místico" class="logo" tabindex="0" aria-label="Logo Chakra Místico" onclick="window.location.href='index.html';" />
+    <nav role="navigation" aria-label="Menu principal">
+        <a href="index.html" class="voltar-link" tabindex="0" aria-label="Voltar ao menu principal">← Voltar ao Menu Principal</a>
+    </nav>
+</header>
+
+<main>
+    <a href="index.html" class="voltar-fora" tabindex="0" aria-label="Voltar ao menu principal"></a>
+    <section id="produtos" tabindex="-1" aria-label="Lista de produtos">
+        <h2><i class="fas fa-shopping-bag"></i> Todos os Produtos</h2>
+
+        <!-- Linha 1 -->
+        <div class="linha-produtos-container" aria-label="Linha 1 de produtos">
+            <button class="scroll-button scroll-left" aria-label="Scroll para a esquerda da linha 1" disabled><i class="fas fa-chevron-left"></i></button>
+            <div class="produtos-scroll-linha" role="list" aria-live="polite" aria-relevant="additions" tabindex="0" id="linha1"></div>
+            <button class="scroll-button scroll-right" aria-label="Scroll para a direita da linha 1"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Linha 2 -->
+        <div class="linha-produtos-container" aria-label="Linha 2 de produtos">
+            <button class="scroll-button scroll-left" aria-label="Scroll para a esquerda da linha 2" disabled><i class="fas fa-chevron-left"></i></button>
+            <div class="produtos-scroll-linha" role="list" aria-live="polite" aria-relevant="additions" tabindex="0" id="linha2"></div>
+            <button class="scroll-button scroll-right" aria-label="Scroll para a direita da linha 2"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Linha 3 -->
+        <div class="linha-produtos-container" aria-label="Linha 3 de produtos">
+            <button class="scroll-button scroll-left" aria-label="Scroll para a esquerda da linha 3" disabled><i class="fas fa-chevron-left"></i></button>
+            <div class="produtos-scroll-linha" role="list" aria-live="polite" aria-relevant="additions" tabindex="0" id="linha3"></div>
+            <button class="scroll-button scroll-right" aria-label="Scroll para a direita da linha 3"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Chakra Místico. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+// Dados dos produtos (30 produtos)
+const produtos = [
+    {nome: "Kit Ametista 6mm (kit 2 Fios)", descricao: "A Ametista protege e purifica, transformando energias negativas em positivas.", preco: "R$ 113,71", img: "imagens/ametista.jpg", url: "https://produto.mercadolivre.com.br/MLB-1609347091-kit-ametista-6mm-kit-contem-2-fios-_JM"},
+    {nome: "Pulseira Shambala 7 Chakras", descricao: "Simboliza equilíbrio e harmonia dos chakras, ideal para proteção e meditação.", preco: "R$ 39,00", img: "imagens/shambala 7 chakras.jpg", url: "https://produto.mercadolivre.com.br/MLB-713965638-pulseira-shambala-7-chakras-_JM"},
+    {nome: "Kit Quartzo Rosa 8mm (kit 2 Fios)", descricao: "Pedra do amor que acalma emoções e fortalece o amor-próprio.", preco: "R$ 88,56", img: "imagens/quartzo rosa.jpg", url: "https://produto.mercadolivre.com.br/MLB-1063852397-kit-quartzo-rosa-8mm-kit-2-fios-_JM"},
+    {nome: "Lápis Lazuli 6mm (kit 2 Fios)", descricao: "Pedra da sabedoria e verdade, estimula mente e fortalece intuição.", preco: "R$ 104,01", img: "imagens/lapis lazuli.jpg", url: "https://produto.mercadolivre.com.br/MLB-1610481125-lapis-lazuli-6mm-kit-2-fios-_JM"},
+    {nome: "Kit Pedra Vulcânica 10mm (kit 2 Fios)", descricao: "Energia de força e renovação, ajuda na superação de desafios e proteção.", preco: "R$ 104,01", img: "imagens/pedra vulcanica.jpg", url: "https://produto.mercadolivre.com.br/MLB-713965640-kit-pedra-vulcnica-10mm-kit-contem-2-fios-_JM"},
+    {nome: "Kit Obsidiana 8mm (kit 2 Fios)", descricao: "Pedra de proteção intensa, afasta energias negativas e promove clareza mental.", preco: "R$ 103,01", img: "imagens/obsidiana.jpg", url: "https://produto.mercadolivre.com.br/MLB-841044075-kit-obsidiana-8mm-kit-2-fios-_JM"},
+    {nome: "Kit Ônix Fosca 8mm (kit 2 Fios)", descricao: "A Ônix fosca fortalece o emocional, protege contra energias negativas e promove foco e determinação.", preco: "R$ 86,01", img: "imagens/onix.webp", url: "https://produto.mercadolivre.com.br/MLB-1601526481-kit-onix-fosca-8mm-kit-2-fios-_JM"},
+    {nome: "Kit Jaspe Ocean 6mm (kit 2 Fios)", descricao: "O Jaspe Ocean promove equilíbrio emocional, alivia o estresse e conecta com a energia tranquila do oceano.", preco: "R$ 104,61", img: "imagens/jaspeOc.webp", url: "https://produto.mercadolivre.com.br/MLB-1617748837-kit-jaspe-ocean-6mm-kit-contem-2-fios-_JM"},
+    {nome: "Entremeio Buda (10 un.)", descricao: "Peças simbolizando Buda, ideais para criar bijuterias com propósito espiritual, paz interior e boas vibrações.", preco: "R$ 54,00", img: "imagens/buda.webp", url: "https://produto.mercadolivre.com.br/MLB-1194932500-entremeio-buda-10-unidades-_JM"},
+    {nome: "Kit Malaquita 8mm (kit 2 Fios)", descricao: "A Malaquita é uma pedra de transformação, que limpa energias negativas e estimula cura emocional e crescimento espiritual.", preco: "R$ 75,90", img: "imagens/malaquita.webp", url: "https://produto.mercadolivre.com.br/MLB-948747464-kit-malaquita-8mm-kit-contem-2-fios-_JM"},
+    {nome: "Kit Pedra Estrela 10mm (kit 2 Fios)", descricao: "A Pedra Estrela é conhecida por trazer sorte, equilíbrio e aumentar a percepção espiritual e intuitiva.", preco: "R$ 100,51", img: "imagens/pedraestrela.webp", url: "https://produto.mercadolivre.com.br/MLB-985855655-kit-pedra-estrela-10mm-kit-contem-2-fios-_JM"},
+    {nome: "Kit Entremeio Cruz Floco De Neve (10 Unidades)", descricao: "Entremeios com o símbolo da cruz e floco de neve, trazendo energia de renovação, proteção e fé em cada peça.", preco: "R$ 63,00", img: "imagens/cruzfloco.webp", url: "https://produto.mercadolivre.com.br/MLB-1049238996-kit-entremeio-cruz-floco-de-neve-10-unidades-_JM"},
+    {nome: "Citrino 6mm", descricao: "O Citrino é uma pedra de prosperidade e energia positiva, trazendo luz e clareza mental, além de fortalecer a autoestima.", preco: "R$ 28,29", img: "imagens/citrino.webp", url: "https://produto.mercadolivre.com.br/MLB-840813592-citrino-6mm-_JM"},
+    {nome: "Kit Opala Olho De Gato 8mm (kit 2 Fios)", descricao: "A Opala Olho de Gato é uma pedra que ajuda a aumentar a percepção e concentração, promovendo clareza nas decisões e proteção energética.", preco: "R$ 94,00", img: "imagens/opala.webp", url: "https://produto.mercadolivre.com.br/MLB-1609365420-kit-opala-olho-de-gato-8mm-kit-contem-2-fios-_JM"},
+    {nome: "Gargantilha Gótica Fita Verde", descricao: "A Gargantilha Gótica com fita verde traz um toque de mistério e estilo, além de representar energia revitalizante e equilíbrio emocional.", preco: "R$ 22,44", img: "imagens/gargantilha.webp", url: "https://produto.mercadolivre.com.br/MLB-714995858-gargantilha-gotica-fita-verde-_JM"},
+    {nome: "Kit Ágata Verde 6mm (kit 2 Fios)", descricao: "A Ágata Verde é uma pedra que promove equilíbrio, serenidade e ajuda a aliviar tensões, trazendo harmonia ao ambiente.", preco: "R$ 74,00", img: "imagens/agata.webp", url: "https://produto.mercadolivre.com.br/MLB-1181417990-kit-agata-verde-6mm-pedra-natural-kit-contem-2-fios-_JM"},
+    {nome: "Entremeio Cruz Ônix (10 Unidades)", descricao: "Entremeios com cruz de Ônix, ideal para criar peças que trazem proteção, força e equilíbrio energético.", preco: "R$ 66,00", img: "imagens/cruzonix.webp", url: "https://produto.mercadolivre.com.br/MLB-1665625557-entremeio-cruz-onix-10-unidades-_JM"},
+    {nome: "Kit Jade Africana 6mm (kit 2 Fios)", descricao: "A Jade Africana é uma pedra de sabedoria e prosperidade, promovendo equilíbrio e harmonia na vida do usuário.", preco: "R$ 101,51", img: "imagens/jadeafrica.webp", url: "https://produto.mercadolivre.com.br/MLB-1148294711-jade-africana-6mm-kit-com-2-fios-_JM"},
+    {nome: "Kit Aventurina 6mm (kit 2 Fios)", descricao: "A Aventurina é uma pedra que favorece a prosperidade, a sorte e o equilíbrio emocional, ideal para quem busca harmonia e crescimento pessoal.", preco: "R$ 99,71", img: "imagens/aventurina.webp", url: "https://produto.mercadolivre.com.br/MLB-1632678623-kit-aventurina-6mm-modc024-kit-2-fios-_JM"},
+    {nome: "Kit Pedra do Sol 6mm (kit 2 Fios)", descricao: "A Pedra do Sol é conhecida por trazer vitalidade e energia positiva, estimulando a autoconfiança e a alegria de viver.", preco: "R$ 75,00", img: "imagens/pedradosol.webp", url: "https://produto.mercadolivre.com.br/MLB-1067555508-kit-fio-de-pedra-do-sol-6mm-kit-2-fios-_JM"},
+    {nome: "Entremeio Leão Dourado (10 Unidades)", descricao: "O Entremeio Leão Dourado simboliza coragem, poder e liderança, ideal para criar peças que transmitem força e majestade.", preco: "R$ 65,00", img: "imagens/leao.webp", url: "https://produto.mercadolivre.com.br/MLB-833325258-entremeio-leo-cor-dourada-10-unidades-_JM"},
+    {nome: "Kit Howlita 6mm (kit 2 Fios)", descricao: "A Howlita promove serenidade e paciência, auxiliando no equilíbrio emocional e no alívio de tensões.", preco: "R$ 82,01", img: "imagens/howlita.webp", url: "https://produto.mercadolivre.com.br/MLB-1601576743-kit-howlita-6mm-2-fios-_JM"},
+    {nome: "Kit Jaspe Vermelho 8mm (kit 2 Fios)", descricao: "O Jaspe Vermelho é uma pedra de vitalidade, estimulando a energia física e emocional, além de promover coragem e confiança.", preco: "R$ 108,01", img: "imagens/jaspevermelho.webp", url: "https://produto.mercadolivre.com.br/MLB-943772686-kit-jaspe-vermelho-8mm-kit-2-fios-_JM"},
+    {nome: "Kit Fluorita 8mm (kit 2 Fios)", descricao: "A Fluorita é uma pedra de purificação e equilíbrio, ideal para clareza mental e espiritual, além de promover proteção energética.", preco: "R$ 111,01", img: "imagens/fluorita.webp", url: "https://produto.mercadolivre.com.br/MLB-1632697050-kit-fluorita-8mm-kit-com-2-fios-mod484-_JM"},
+    {nome: "Kit Bronzita 10mm", descricao: "A Bronzita é uma pedra que ajuda a aumentar a autoestima, trazendo equilíbrio e força emocional. Ideal para quem busca coragem e autoconfiança.", preco: "R$ 139,00", img: "imagens/bronzita.webp", url: "https://produto.mercadolivre.com.br/MLB-1507756562-kit-bronzita-10mm-kit-contem-2-fios-_JM" },
+    {nome: "Kit Olho de Tigre Fosco 10mm", descricao: "O Olho de Tigre Fosco é uma pedra que fortalece a coragem e a proteção, além de promover equilíbrio e confiança. Ideal para quem busca estabilidade emocional.", preco: "R$ 122,00", img: "imagens/olhotigrefosco.webp", url: "https://produto.mercadolivre.com.br/MLB-841043749-kit-olho-de-tigre-fosco-10mm-kit-2-fios-_JM" },
+    {nome: "Kit Unakita 6mm (kit 2 Fios)", descricao: "A Unakita é uma pedra que promove o equilíbrio emocional, aliviando o estresse e promovendo a harmonia interior.", preco: "R$ 81,01", img: "imagens/unakita.webp", url: "https://produto.mercadolivre.com.br/MLB-987765624-kit-unakita-6mm-contem-2-fios-_JM"},
+    {nome: "Kit Obsidiana 8mm (kit 2 Fios)", descricao: "A Obsidiana é uma pedra de intensa proteção energética, afastando as vibrações negativas e proporcionando clareza mental e equilíbrio emocional.", preco: "R$ 103,01", img: "imagens/obsidiana2.webp", url: "https://produto.mercadolivre.com.br/MLB-841044075-kit-obsidiana-8mm-kit-2-fios-_JM" },
+    {nome: "Kit Malaquita 8mm (kit Contém 2 Fios)", descricao: "A Malaquita auxilia na eliminação de bloqueios emocionais e promove a transformação pessoal, trazendo cura e equilíbrio.", preco: "R$ 75,90", img: "imagens/malaquita2.webp", url: "https://produto.mercadolivre.com.br/MLB-948747464-kit-malaquita-8mm-kit-contem-2-fios-_JM" },
+    {nome: "Kit Jaspe Ocean 6mm (kit Contém 2 Fios)", descricao: "O Jaspe Ocean traz equilíbrio emocional e acalma a mente, promovendo tranquilidade e conexão com as energias naturais.", preco: "R$ 104,61", img: "imagens/jaspe2.webp", url: "https://produto.mercadolivre.com.br/MLB-1617748837-kit-jaspe-ocean-6mm-kit-contem-2-fios-_JM" }
+
+];  
+
+// CASO N TENHA 30 PRODUTOS, ELE RETORNA PRODUTOS GENERICOS
+for(let i = produtos.length + 1; i <= 30; i++) {
+    produtos.push({
+        nome: `Produto Exemplo ${i}`,
+        descricao: `Descrição breve do Produto Exemplo ${i}, com pedras naturais e energia positiva.`,
+        preco: `R$ ${(i * 10 + 29).toFixed(2).replace('.', ',')}`,
+        img: `https://via.placeholder.com/280?text=Produto+${i}`,
+        url: "#"
+    });
+}
+
+const produtosPorPagina = 3;
+const larguraProdutoPx = 280 + 16; // largura produto + gap (gap 1rem =16px)
+const containers = [
+    document.getElementById('linha1'),
+    document.getElementById('linha2'),
+    document.getElementById('linha3'),
+];
+
+// Distribui os produtos igualmente entre as 3 linhas
+const produtosLinhas = [[], [], []];
+produtos.forEach((p, i) => {
+    produtosLinhas[i % 3].push(p);
+});
+
+// Renderiza produtos para cada linha
+function renderizarProdutosLinha(linhaIndex) {
+    const container = containers[linhaIndex];
+    container.innerHTML = '';
+    produtosLinhas[linhaIndex].forEach(prod => {
+        const article = document.createElement('article');
+        article.className = 'produto';
+        article.setAttribute('role', 'listitem');
+        article.setAttribute('tabindex', '0');
+        article.innerHTML = `
+            <img src="${prod.img}" alt="${prod.nome}" loading="lazy" />
+            <h3>${prod.nome}</h3>
+            <p>${prod.descricao}</p>
+            <strong>Preço: ${prod.preco}</strong>
+            <button onclick="window.open('${prod.url}', '_blank', 'noopener,noreferrer')">Comprar Agora</button>
+        `;
+        container.appendChild(article);
+    });
+}
+
+for(let i=0; i<3; i++){
+    renderizarProdutosLinha(i);
+}
+
+// Controla scroll e botões
+document.querySelectorAll('.linha-produtos-container').forEach((linhaContainer, idx) => {
+    const scrollArea = linhaContainer.querySelector('.produtos-scroll-linha');
+    const btnLeft = linhaContainer.querySelector('.scroll-left');
+    const btnRight = linhaContainer.querySelector('.scroll-right');
+
+    function atualizarBotoes() {
+        btnLeft.disabled = scrollArea.scrollLeft <= 0;
+        btnRight.disabled = scrollArea.scrollLeft + scrollArea.clientWidth >= scrollArea.scrollWidth - 1;
+    }
+
+    btnLeft.addEventListener('click', () => {
+        scrollArea.scrollBy({left: -produtosPorPagina * larguraProdutoPx, behavior: 'smooth'});
+    });
+    btnRight.addEventListener('click', () => {
+        scrollArea.scrollBy({left: produtosPorPagina * larguraProdutoPx, behavior: 'smooth'});
+    });
+
+    scrollArea.addEventListener('scroll', atualizarBotoes);
+    atualizarBotoes();
+
+    // Prevenir scroll vertical ao usar roda do mouse no container horizontal
+    scrollArea.addEventListener('wheel', (evt) => {
+        if (evt.deltaY !== 0) {
+            evt.preventDefault();
+            scrollArea.scrollBy({
+                left: evt.deltaY,
+                behavior: 'smooth'
+            });
+        }
+    }, { passive: false });
+});
+</script>
+</body>
+</html>
+
